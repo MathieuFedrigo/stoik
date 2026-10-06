@@ -91,4 +91,4 @@ npm run dev
 └── README.md
 ```
 
-La base PostgreSQL est démarrée et configurée via `DATABASE_URL` côté backend ; aucune migration n’est requise pour l’endpoint `/hello-word` actuel.
+La base PostgreSQL est configurée via `DATABASE_URL` côté backend. L’endpoint `/hello-word` lit le message via **TypeORM** (entité `HelloMessage` dans `backend/src/hello/entities/`). Au premier démarrage, une ligne par défaut est insérée si la table est vide ; le schéma est synchronisé automatiquement en développement (`synchronize: true`).
