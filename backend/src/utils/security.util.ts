@@ -1,19 +1,21 @@
 import { BlockList, isIPv4, isIPv6 } from 'node:net';
 import { lookup } from 'node:dns/promises';
+import {
+  AppHttpError,
+  BadRequestError,
+  ForbiddenError,
+} from '../common/http-error';
 
-export class UnacceptableAddressError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = 'UnacceptableAddressError';
-  }
-}
+/** How URL validation failures map to HTTP status when exposing a stored short link. */
+export type UrlValidationPolicy = 'create' | 'redirect';
 
-/** Host has no DNS record (customer-side issue), not a security rejection. */
-export class UnresolvableHostError extends UnacceptableAddressError {
-  constructor(message: string) {
-    super(message);
-    this.name = 'UnresolvableHostError';
-  }
+function rejectUrl(
+  message: string,
+  policy: UrlValidationPolicy,
+): AppHttpError {
+  return policy === 'redirect'
+    ? new ForbiddenError(message)
+    : new BadRequestError(message);
 }
 
 const blockedAddresses = new BlockList();
@@ -52,7 +54,7 @@ function normalizeIp(ip: string): string {
   return ip;
 }
 
-function isIpAllowed(addrIp: string): boolean {
+function isIpAllowed(addrIp: string, policy: UrlValidationPolicy): boolean {
   const ip = normalizeIp(addrIp);
   if (isIPv4(ip)) {
     return !blockedAddresses.check(ip, 'ipv4');
@@ -60,23 +62,26 @@ function isIpAllowed(addrIp: string): boolean {
   if (isIPv6(ip)) {
     return !blockedAddresses.check(ip, 'ipv6');
   }
-  throw new UnacceptableAddressError('The given Host is not allowed');
+  throw rejectUrl('The given Host is not allowed', policy);
 }
 
-export async function checkUrlAllowed(url: string): Promise<void> {
+export async function checkUrlAllowed(
+  url: string,
+  policy: UrlValidationPolicy = 'create',
+): Promise<void> {
   let parsed: URL;
   try {
     parsed = new URL(url);
   } catch {
-    throw new UnacceptableAddressError('The url does not match the scheme');
+    throw rejectUrl('The url does not match the scheme', policy);
   }
 
   if (parsed.hostname === '') {
-    throw new UnacceptableAddressError('The hostname was not given');
+    throw rejectUrl('The hostname was not given', policy);
   }
 
   if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') {
-    throw new UnacceptableAddressError('The url does not match the scheme');
+    throw rejectUrl('The url does not match the scheme', policy);
   }
 
   const port =
@@ -87,23 +92,25 @@ export async function checkUrlAllowed(url: string): Promise<void> {
         : 80;
 
   if (!Number.isInteger(port) || port < 1 || port > 65535) {
-    throw new UnacceptableAddressError('The given Host is not allowed');
+    throw rejectUrl('The given Host is not allowed', policy);
   }
 
-  await checkHostPortAllowed(parsed.hostname, port);
+  await checkHostPortAllowed(parsed.hostname, port, policy);
 }
 
 export async function checkHostPortAllowed(
   host: string,
   _port: number,
+  policy: UrlValidationPolicy = 'create',
 ): Promise<void> {
   let addresses: { address: string; family: number }[];
   try {
     addresses = await lookup(host, { all: true, verbatim: true });
   } catch (err) {
     const detail = err instanceof Error ? err.message : String(err);
-    throw new UnresolvableHostError(
+    throw rejectUrl(
       `The hostname ${host} could not be resolved (${detail})`,
+      policy,
     );
   }
 
@@ -112,8 +119,8 @@ export async function checkHostPortAllowed(
   }
 
   for (const { address } of addresses) {
-    if (!isIpAllowed(address)) {
-      throw new UnacceptableAddressError('The given Host is not allowed');
+    if (!isIpAllowed(address, policy)) {
+      throw rejectUrl('The given Host is not allowed', policy);
     }
   }
 }

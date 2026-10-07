@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  ForbiddenException,
-  Get,
-  Param,
-  Post,
-} from '@nestjs/common';
-import { UnacceptableAddressError } from '../utils/security.util';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { formatToUrlShortenerPostResponseModel } from './url-shortener.formaters';
 import { UrlShortenerService } from './url-shortener.managers';
 import {
@@ -31,15 +23,8 @@ export class UrlShortenerController {
   async redirect(
     @Param('hash') hash: string,
   ): Promise<UrlShortenerResolveResponseModel> {
-    try {
-      const destinationUrl =
-        await this.service.resolveRedirectDestination(hash);
-      return { destinationUrl };
-    } catch (err) {
-      if (err instanceof UnacceptableAddressError) {
-        throw new ForbiddenException(err.message);
-      }
-      throw err;
-    }
+    const destinationUrl =
+      await this.service.resolveRedirectDestination(hash);
+    return { destinationUrl };
   }
 }
