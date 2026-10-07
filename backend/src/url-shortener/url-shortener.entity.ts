@@ -1,7 +1,6 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('url_shorteners')
-@Index(['hash'])
 export class UrlShortener {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -9,7 +8,7 @@ export class UrlShortener {
   @Column({ type: 'text' })
   url!: string;
 
-  @Column({ type: 'varchar', length: 8 })
+  @Column({ type: 'varchar', length: 8, unique: true })
   hash!: string;
 
 

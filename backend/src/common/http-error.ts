@@ -33,3 +33,9 @@ export class TooManyRequestsError extends AppHttpError {
     super(message, 429);
   }
 }
+
+export class TryAgainLaterError extends AppHttpError {
+  constructor(message = 'Please try again later.') {
+    super(message, 503);
+  }
+}
