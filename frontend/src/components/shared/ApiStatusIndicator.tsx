@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './ApiStatusIndicator.css';
 import { fetchHealth } from '@/services/Health.service';
 
 const POLL_INTERVAL_MS = 15_000;

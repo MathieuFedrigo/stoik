@@ -1,3 +1,4 @@
+import './USIcon.css';
 import type { ReactElement, SVGProps } from 'react';
 
 export type USIconName = 'clipboard';

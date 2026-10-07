@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './RedirectInterstitial.css';
 import { USButton } from '@/components/generic/USButton';
 import { resolveUrlShortenerRedirect } from '@/services/UrlShortener.service';
 

@@ -1,0 +1,31 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form label {
+  font-size: 0.75rem;
+  color: #8b949e;
+  text-transform: lowercase;
+}
+
+.form input[type='url'] {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  font: inherit;
+  color: #e6edf3;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.form input[type='url']::placeholder {
+  color: #484f58;
+}
+
+.form input[type='url']:focus {
+  border-color: var(--accent);
+}

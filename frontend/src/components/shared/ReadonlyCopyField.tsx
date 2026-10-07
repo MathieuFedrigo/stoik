@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './ReadonlyCopyField.css';
 import { USIcon } from '@/components/generic/USIcon';
 
 type Props = {
