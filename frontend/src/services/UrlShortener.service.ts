@@ -1,23 +1,9 @@
+import type { ResolveRedirectResult } from '../types/models/UrlShortener';
+import type {
+  UrlShortenerPostResponse,
+  UrlShortenerRedirectResponse,
+} from '../types/routes/UrlShortener';
 import { apiUrl } from './ApiConfig';
-
-export type CreateUrlShortenerResponse = {
-  shortUrl: string;
-  originalUrl: string;
-};
-
-export type ResolveRedirectResponse = {
-  destinationUrl: string;
-};
-
-export type ResolveRedirectFailure =
-  | { reason: 'notFound' }
-  | { reason: 'forbidden' }
-  | { reason: 'network' }
-  | { reason: 'error'; message: string };
-
-export type ResolveRedirectResult =
-  | { ok: true; data: ResolveRedirectResponse }
-  | { ok: false; failure: ResolveRedirectFailure };
 
 export class UrlShortenerNetworkError extends Error {
   constructor() {
@@ -28,7 +14,7 @@ export class UrlShortenerNetworkError extends Error {
 
 export async function createUrlShortener(
   url: string,
-): Promise<CreateUrlShortenerResponse> {
+): Promise<UrlShortenerPostResponse> {
   let res: Response;
   try {
     res = await fetch(`${apiUrl}/url-shortener`, {
@@ -48,7 +34,7 @@ export async function createUrlShortener(
     throw new Error(text || `HTTP ${res.status}`);
   }
 
-  return (await res.json()) as CreateUrlShortenerResponse;
+  return (await res.json()) as UrlShortenerPostResponse;
 }
 
 export async function resolveUrlShortenerRedirect(
@@ -83,6 +69,6 @@ export async function resolveUrlShortenerRedirect(
     };
   }
 
-  const data = (await res.json()) as ResolveRedirectResponse;
+  const data = (await res.json()) as UrlShortenerRedirectResponse;
   return { ok: true, data };
 }

@@ -16,7 +16,7 @@ export type ResolveRedirectFailure =
   | { reason: 'error'; message: string };
 
 export type ResolveRedirectResult =
-  | { ok: true; destination: RedirectDestination }
+  | { ok: true; data: RedirectDestination }
   | { ok: false; failure: ResolveRedirectFailure };
 
 export type RedirectInterstitialViewState =
