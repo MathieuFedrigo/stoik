@@ -1,9 +1,10 @@
 import { FormEvent, useState } from 'react';
-import { ReadonlyCopyField } from '../components/ReadonlyCopyField';
+import { ReadonlyCopyField } from '../components/shared/ReadonlyCopyField';
+import { USButton } from '../components/generic/USButton';
 import {
   createUrlShortener,
   UrlShortenerNetworkError,
-} from '../services/url-shortener.service';
+} from '../services/UrlShortener.service';
 
 export function UrlShortenerHome() {
   const [url, setUrl] = useState('');
@@ -71,17 +72,17 @@ export function UrlShortenerHome() {
 
         <div className="actions">
           {isShortened ? (
-            <a className="button button-primary" href={shortUrl}>
+            <USButton variant="primary" href={shortUrl}>
               Visiter la page
-            </a>
+            </USButton>
           ) : (
-            <button
+            <USButton
+              variant="primary"
               type="submit"
-              className="button button-primary"
               disabled={loading || !url.trim()}
             >
               {loading ? 'Raccourcissement…' : 'Raccourcir'}
-            </button>
+            </USButton>
           )}
         </div>
       </form>

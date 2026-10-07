@@ -1,4 +1,4 @@
-import { parseShortHashFromPathname } from './lib/shortHash';
+import { parseShortHashFromPathname } from './utils/hash';
 import { RedirectInterstitial } from './pages/RedirectInterstitial';
 import { UrlShortenerHome } from './pages/UrlShortenerHome';
 

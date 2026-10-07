@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { resolveUrlShortenerRedirect } from '../services/url-shortener.service';
+import { USButton } from '../components/generic/USButton';
+import { resolveUrlShortenerRedirect } from '../services/UrlShortener.service';
 
 const MIN_DISPLAY_MS = 5000;
 
@@ -118,9 +119,9 @@ export function RedirectInterstitial({ hash }: Props) {
             autorisée ou n’est plus joignable.
           </p>
           <div className="actions">
-            <a className="button button-secondary" href="/">
+            <USButton variant="secondary" href="/">
               Retour à l’accueil
-            </a>
+            </USButton>
           </div>
         </>
       )}
@@ -130,9 +131,9 @@ export function RedirectInterstitial({ hash }: Props) {
           <p className="tagline">lien introuvable</p>
           <p className="muted">Ce raccourci n’existe pas ou a été supprimé.</p>
           <div className="actions">
-            <a className="button button-secondary" href="/">
+            <USButton variant="secondary" href="/">
               Retour à l’accueil
-            </a>
+            </USButton>
           </div>
         </>
       )}
@@ -144,9 +145,9 @@ export function RedirectInterstitial({ hash }: Props) {
             {view.message}
           </p>
           <div className="actions">
-            <a className="button button-secondary" href="/">
+            <USButton variant="secondary" href="/">
               Retour à l’accueil
-            </a>
+            </USButton>
           </div>
         </>
       )}

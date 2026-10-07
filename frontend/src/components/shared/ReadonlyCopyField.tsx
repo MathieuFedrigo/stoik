@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ClipboardIcon } from './ClipboardIcon';
+import { USIcon } from '../generic/USIcon';
 
 type Props = {
   value: string;
@@ -31,14 +31,12 @@ export function ReadonlyCopyField({
       <output id={id} className="readonly-field-value">
         {value}
       </output>
-      <button
-        type="button"
+      <USIcon
+        name="clipboard"
         className="readonly-field-copy"
         onClick={() => void copy()}
-        aria-label={copied ? 'Lien copié' : copyAriaLabel}
-      >
-        <ClipboardIcon />
-      </button>
+        ariaLabel={copied ? 'Lien copié' : copyAriaLabel}
+      />
     </div>
   );
 }

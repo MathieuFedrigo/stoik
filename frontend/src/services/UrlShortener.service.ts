@@ -1,4 +1,4 @@
-import { apiUrl } from './api-config';
+import { apiUrl } from './ApiConfig';
 
 export type CreateUrlShortenerResponse = {
   shortUrl: string;
