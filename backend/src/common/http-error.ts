@@ -25,3 +25,11 @@ export class NotFoundError extends AppHttpError {
     super(message, 404);
   }
 }
+
+export class TooManyRequestsError extends AppHttpError {
+  constructor(
+    message = 'Too many requests, please try again later',
+  ) {
+    super(message, 429);
+  }
+}

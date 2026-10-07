@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { RateLimit } from '../rate-limit/rate-limit.decorator';
+import { RateLimitGuard } from '../rate-limit/rate-limit.guard';
 import { formatToUrlShortenerPostResponseModel } from './url-shortener.formaters';
 import { UrlShortenerService } from './url-shortener.managers';
 import {
@@ -11,6 +20,8 @@ import {
 export class UrlShortenerController {
   constructor(private readonly service: UrlShortenerService) {}
 
+  @UseGuards(RateLimitGuard)
+  @RateLimit({ max: 10, bucketPrefix: 'url-shortener:post' })
   @Post('url-shortener')
   async createUrlShortener(
     @Body() body: UrlShortenerPostBodyModel,
