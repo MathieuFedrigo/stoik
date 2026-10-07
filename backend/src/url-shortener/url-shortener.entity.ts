@@ -12,7 +12,9 @@ export class UrlShortener {
   @Column({ type: 'varchar', length: 8 })
   hash!: string;
 
+
   get shortUrl(): string {
-    return `http://localhost/${this.hash}`;
+    const origin = process.env.SHORT_URL_ORIGIN ?? 'http://localhost:5174';
+    return `${origin.replace(/\/$/, '')}/${this.hash}`;
   }
 }

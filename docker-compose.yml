@@ -32,7 +32,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: npm run start:dev
+    command: sh -c "npm install && npm run start:dev"
 
   frontend:
     build:
@@ -41,6 +41,7 @@ services:
     container_name: stoik-frontend
     environment:
       VITE_API_URL: http://localhost:3001
+      VITE_PROXY_TARGET: http://backend:3001
     ports:
       - "5174:5174"
     volumes:

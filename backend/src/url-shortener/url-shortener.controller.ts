@@ -10,7 +10,6 @@ export class UrlShortenerController {
   @Post()
   async createUrlShortener(@Body() body: UrlShortenerPostBodyModel): Promise<UrlShortenerPostResponseModel> {
     const urlShortener = await this.service.createUrlShortener(body.url);
-
     return formatToUrlShortenerPostResponseModel(urlShortener);
   }
 }
