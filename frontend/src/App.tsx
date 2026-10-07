@@ -1,6 +1,6 @@
-import { RedirectInterstitial } from './RedirectInterstitial';
-import { parseShortHashFromPathname } from './shortHash';
-import { UrlShortenerHome } from './UrlShortenerHome';
+import { parseShortHashFromPathname } from './lib/shortHash';
+import { RedirectInterstitial } from './pages/RedirectInterstitial';
+import { UrlShortenerHome } from './pages/UrlShortenerHome';
 
 export default function App() {
   const shortHash = parseShortHashFromPathname(window.location.pathname);

@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/redirectinterstitial.tsx","./src/urlshortenerhome.tsx","./src/api.ts","./src/main.tsx","./src/shorthash.ts","./src/vite-env.d.ts"],"version":"5.9.3"}
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/clipboardicon.tsx","./src/components/readonlycopyfield.tsx","./src/lib/shorthash.ts","./src/pages/redirectinterstitial.tsx","./src/pages/urlshortenerhome.tsx","./src/services/api-config.ts","./src/services/url-shortener.service.ts"],"version":"5.9.3"}

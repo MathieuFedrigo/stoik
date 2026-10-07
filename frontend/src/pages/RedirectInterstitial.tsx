@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
-import { apiUrl } from './api';
+import { resolveUrlShortenerRedirect } from '../services/url-shortener.service';
 
 const MIN_DISPLAY_MS = 5000;
-
-type ResolveResponse = {
-  destinationUrl: string;
-};
 
 type ViewState =
   | { kind: 'loading' }
@@ -33,32 +29,33 @@ export function RedirectInterstitial({ hash }: Props) {
 
     async function run() {
       try {
-        const res = await fetch(`${apiUrl}/url-shortener/${hash}`);
+        const result = await resolveUrlShortenerRedirect(hash);
 
-        if (res.status === 404) {
-          if (!cancelled) setView({ kind: 'notFound' });
-          return;
-        }
-
-        if (res.status === 403) {
-          if (!cancelled) setView({ kind: 'forbidden' });
-          return;
-        }
-
-        if (!res.ok) {
-          const text = await res.text();
-          if (!cancelled) {
-            setView({
-              kind: 'error',
-              message: text || `HTTP ${res.status}`,
-            });
+        if (!result.ok) {
+          if (cancelled) return;
+          switch (result.failure.reason) {
+            case 'notFound':
+              setView({ kind: 'notFound' });
+              return;
+            case 'forbidden':
+              setView({ kind: 'forbidden' });
+              return;
+            case 'network':
+              setView({
+                kind: 'error',
+                message:
+                  'Impossible de joindre l’API. Vérifiez que le backend tourne ou relancez docker compose up.',
+              });
+              return;
+            case 'error':
+              setView({ kind: 'error', message: result.failure.message });
+              return;
           }
-          return;
         }
 
-        const data = (await res.json()) as ResolveResponse;
+        const { destinationUrl } = result.data;
         if (!cancelled) {
-          setView({ kind: 'ready', destinationUrl: data.destinationUrl });
+          setView({ kind: 'ready', destinationUrl });
         }
 
         const elapsed = Date.now() - pageStarted;
@@ -69,18 +66,10 @@ export function RedirectInterstitial({ hash }: Props) {
         }
 
         if (!cancelled) {
-          window.location.assign(data.destinationUrl);
+          window.location.assign(destinationUrl);
         }
       } catch (err) {
         if (cancelled) return;
-        if (err instanceof TypeError && err.message === 'Failed to fetch') {
-          setView({
-            kind: 'error',
-            message:
-              'Impossible de joindre l’API. Vérifiez que le backend tourne ou relancez docker compose up.',
-          });
-          return;
-        }
         setView({
           kind: 'error',
           message: err instanceof Error ? err.message : 'Une erreur est survenue',
