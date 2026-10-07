@@ -1,4 +1,4 @@
-import { randomBytes } from 'node:crypto';
+import { randomInt } from 'node:crypto';
 
 const ALPHANUM =
   'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -6,8 +6,8 @@ const ALPHANUM =
 export const HASH_PATTERN = /^[A-Za-z0-9]{8}$/;
 
 export function generateHash(): string {
-  const bytes = randomBytes(8);
-  return Array.from(bytes, (byte) => ALPHANUM[byte % ALPHANUM.length]).join(
-    '',
-  );
+  return Array.from(
+    { length: 8 },
+    () => ALPHANUM[randomInt(ALPHANUM.length)],
+  ).join('');
 }
