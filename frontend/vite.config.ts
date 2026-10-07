@@ -13,10 +13,6 @@ export default defineConfig({
         target: proxyTarget,
         changeOrigin: true,
       },
-      '^/[A-Za-z0-9]{8}$': {
-        target: proxyTarget,
-        changeOrigin: true,
-      },
     },
   },
 });
