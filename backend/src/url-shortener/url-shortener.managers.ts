@@ -17,4 +17,8 @@ export class UrlShortenerService {
     const urlShortener = this.repository.create({ url, hash });
     return this.repository.save(urlShortener);
   }
+
+  async findByHash(hash: string): Promise<UrlShortener | null> {
+    return this.repository.findOne({ where: { hash } });
+  }
 }

@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
 
+:root {
+  --accent: #58a6ff;
+  --accent-hover: #79c0ff;
+  --accent-border: #388bfd;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -24,7 +30,7 @@ h1 {
   margin: 0;
   font-size: 1.125rem;
   font-weight: 500;
-  color: #58a6ff;
+  color: var(--accent);
   letter-spacing: 0.02em;
 }
 
@@ -63,7 +69,7 @@ input[type='url']::placeholder {
 }
 
 input[type='url']:focus {
-  border-color: #58a6ff;
+  border-color: var(--accent);
 }
 
 .error {
@@ -92,13 +98,13 @@ input[type='url']:focus {
 
 .button-primary {
   color: #0d1117;
-  background: #3fb950;
-  border-color: #2ea043;
+  background: var(--accent);
+  border-color: var(--accent-border);
 }
 
 .button-primary:hover:not(:disabled) {
-  background: #56d364;
-  border-color: #3fb950;
+  background: var(--accent-hover);
+  border-color: var(--accent);
 }
 
 .button-primary:disabled {
@@ -111,8 +117,8 @@ a.button-primary {
 }
 
 a.button-primary:hover {
-  background: #56d364;
-  border-color: #3fb950;
+  background: var(--accent-hover);
+  border-color: var(--accent);
 }
 
 .result {
