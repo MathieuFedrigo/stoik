@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { USButton } from '../components/generic/USButton';
-import { resolveUrlShortenerRedirect } from '../services/UrlShortener.service';
+import { USButton } from '@/components/generic/USButton';
+import { resolveUrlShortenerRedirect } from '@/services/UrlShortener.service';
 
 const MIN_DISPLAY_MS = 5000;
 

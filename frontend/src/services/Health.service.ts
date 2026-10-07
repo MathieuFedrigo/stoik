@@ -1,4 +1,4 @@
-import { apiUrl } from './ApiConfig';
+import { apiUrl } from '@/services/ApiConfig';
 
 export type HealthResponse = { status: 'ok' };
 

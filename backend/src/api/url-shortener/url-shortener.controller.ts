@@ -6,8 +6,8 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { RateLimit } from '../rate-limit/rate-limit.decorator';
-import { RateLimitGuard } from '../rate-limit/rate-limit.guard';
+import { RateLimit } from '@/core/rate-limit/rate-limit.decorator';
+import { RateLimitGuard } from '@/core/rate-limit/rate-limit.guard';
 import { formatToUrlShortenerPostResponseModel } from './url-shortener.formaters';
 import { UrlShortenerService } from './url-shortener.managers';
 import {

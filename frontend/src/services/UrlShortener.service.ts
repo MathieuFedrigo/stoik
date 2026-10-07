@@ -1,9 +1,9 @@
-import type { ResolveRedirectResult } from '../types/models/UrlShortener';
+import { apiUrl } from '@/services/ApiConfig';
+import type { ResolveRedirectResult } from '@/types/models/UrlShortener';
 import type {
   UrlShortenerPostResponse,
   UrlShortenerRedirectResponse,
-} from '../types/routes/UrlShortener';
-import { apiUrl } from './ApiConfig';
+} from '@/types/routes/UrlShortener';
 
 export class UrlShortenerNetworkError extends Error {
   constructor() {

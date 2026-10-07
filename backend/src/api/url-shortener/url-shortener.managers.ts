@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { NotFoundError, TryAgainLaterError } from '../common/http-error';
-import { isUniqueConstraintViolation } from '../utils/db.util';
-import { generateHash, HASH_PATTERN } from '../utils/hash.util';
-import { checkUrlAllowed } from '../utils/security.util';
+import { NotFoundError, TryAgainLaterError } from '@/core/errors/http-error';
+import { isUniqueConstraintViolation } from '@/utils/db.util';
+import { generateHash, HASH_PATTERN } from '@/utils/hash.util';
+import { checkUrlAllowed } from '@/utils/security.util';
 import { UrlShortener } from './url-shortener.entity';
 
 @Injectable()

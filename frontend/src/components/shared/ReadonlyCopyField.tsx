@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { USIcon } from '../generic/USIcon';
+import { USIcon } from '@/components/generic/USIcon';
 
 type Props = {
   value: string;

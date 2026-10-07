@@ -4,7 +4,7 @@ import {
   AppHttpError,
   BadRequestError,
   ForbiddenError,
-} from '../common/http-error';
+} from '@/core/errors/http-error';
 
 /** How URL validation failures map to HTTP status when exposing a stored short link. */
 export type UrlValidationPolicy = 'create' | 'redirect';

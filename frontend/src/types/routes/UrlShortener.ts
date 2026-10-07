@@ -1,4 +1,4 @@
-import { RedirectDestination, ShortLink } from "../models/UrlShortener";
+import { RedirectDestination, ShortLink } from '@/types/models/UrlShortener';
 
 /** Corps de `POST /url-shortener`. */
 export type UrlShortenerPostBody = {

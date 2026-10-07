@@ -4,8 +4,8 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { TooManyRequestsError } from '../common/http-error';
-import { getRequestClientKey } from '../common/request-client-key.util';
+import { TooManyRequestsError } from '@/core/errors/http-error';
+import { getRequestClientKey } from '@/core/rate-limit/request-client-key.util';
 import { InMemoryRateLimitService } from './in-memory-rate-limit.service';
 import {
   DEFAULT_RATE_LIMIT_WINDOW_MS,

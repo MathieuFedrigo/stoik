@@ -1,10 +1,10 @@
 import { FormEvent, useState } from 'react';
-import { ReadonlyCopyField } from '../components/shared/ReadonlyCopyField';
-import { USButton } from '../components/generic/USButton';
+import { USButton } from '@/components/generic/USButton';
+import { ReadonlyCopyField } from '@/components/shared/ReadonlyCopyField';
 import {
   createUrlShortener,
   UrlShortenerNetworkError,
-} from '../services/UrlShortener.service';
+} from '@/services/UrlShortener.service';
 
 export function UrlShortenerHome() {
   const [url, setUrl] = useState('');
