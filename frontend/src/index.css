@@ -72,6 +72,54 @@ input[type='url']:focus {
   border-color: var(--accent);
 }
 
+.readonly-field {
+  display: flex;
+  align-items: stretch;
+  min-height: 2.375rem;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.readonly-field-value {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0.625rem 0.75rem;
+  font: inherit;
+  font-size: inherit;
+  color: var(--accent);
+  word-break: break-all;
+  user-select: all;
+}
+
+.readonly-field-copy {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  padding: 0;
+  font: inherit;
+  color: #8b949e;
+  background: transparent;
+  border: none;
+  border-left: 1px solid #30363d;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.readonly-field-copy:hover {
+  color: var(--accent);
+  background: #21262d;
+}
+
+.readonly-field-copy:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
 .error {
   margin: 0;
   font-size: 0.8125rem;
@@ -121,17 +169,6 @@ a.button-primary:hover {
   border-color: var(--accent);
 }
 
-.result {
-  margin: 0.5rem 0 0;
-  font-size: 0.8125rem;
-  color: #8b949e;
-  word-break: break-all;
-}
-
-.result-label {
-  color: #6e7681;
-}
-
 code {
   font: inherit;
   color: #7ee787;
@@ -148,7 +185,7 @@ code {
   padding: 0.625rem 0.75rem;
   font-size: 0.8125rem;
   word-break: break-all;
-  color: #7ee787;
+  color: var(--accent);
   background: #161b22;
   border: 1px solid #30363d;
   border-radius: 6px;
