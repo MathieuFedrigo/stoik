@@ -220,3 +220,46 @@ a.us-button--primary:hover {
   border: 1px solid #30363d;
   border-radius: 6px;
 }
+
+.api-status {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  font-size: 0.6875rem;
+  color: #8b949e;
+  background: rgba(22, 27, 34, 0.92);
+  border: 1px solid #30363d;
+  border-radius: 999px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.api-status-label {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.api-status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.api-status-dot--ok {
+  background: #3fb950;
+  box-shadow: 0 0 6px rgba(63, 185, 80, 0.55);
+}
+
+.api-status-dot--error {
+  background: #f85149;
+  box-shadow: 0 0 6px rgba(248, 81, 73, 0.45);
+}
+
+.api-status-dot--unknown {
+  background: #484f58;
+}

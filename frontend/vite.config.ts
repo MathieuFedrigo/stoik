@@ -13,6 +13,10 @@ export default defineConfig({
         target: proxyTarget,
         changeOrigin: true,
       },
+      '/health': {
+        target: proxyTarget,
+        changeOrigin: true,
+      },
     },
   },
 });
