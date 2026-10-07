@@ -41,7 +41,8 @@ blockSubnet('2001:db8::', 32, 'ipv6');
 blockSubnet('fc00::', 7, 'ipv6');
 blockSubnet('fe80::', 10, 'ipv6');
 blockSubnet('ff00::', 8, 'ipv6');
-blockSubnet('::ffff:0:0', 96, 'ipv6');
+// Do not block `::ffff:0:0/96` here: Node’s BlockList then marks every IPv4
+// address as blocked when using check(..., 'ipv4'). IPv4-mapped IPv6 is normalized below.
 
 function normalizeIp(ip: string): string {
   const lower = ip.toLowerCase();
